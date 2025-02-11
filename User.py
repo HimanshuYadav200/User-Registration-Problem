@@ -71,6 +71,27 @@ def check_mail(mail_to_check):
 
 
 
+
+def check_mobile_format(number):
+    logging.debug(f"Input number {number} received for validation")
+    
+   
+    pattern = r"^[0-9]{2}\s\d{10}$"
+    
+    if not number:
+        logging.critical("Empty input for number detected")
+        return False 
+
+    if len(number) != 13:
+        logging.error(f"Number {number} is incorrect in length")
+        return False 
+
+    if re.match(pattern, number):
+        logging.info(f"Mobile number {number} is valid")
+        return True 
+    else:
+        logging.warning(f"Mobile number {number} is invalid")
+        return False 
  
     
     
@@ -100,6 +121,14 @@ if check_mail(email):
     print(f"{email} is a Valid Email Address.")
 else:
     print(f"{email} is an Invalid Email Address.")
+    
+    
+    
+mobile_num = input("Enter country code and mobile number: ")
+if check_mobile_format(mobile_num):
+    print(f"{mobile_num} is a valid mobile number.")
+else:
+    print("Invalid mobile number.")
     
     
         
