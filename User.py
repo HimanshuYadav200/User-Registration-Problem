@@ -160,7 +160,38 @@ def check_pass_Rule3(pass_to_check):
         return True
     else:
         logging.warning(f"password {pass_to_check} id invalid")  
-        return False      
+        return False   
+    
+    
+    
+def check_pass_Rule4(pass_to_check):
+    
+    logging.debug(f"received password {pass_to_check} for checking")
+  
+    pattern=r"^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&*]).{8,}$"
+  
+    if not pass_to_check:
+        logging.critical("input password is empty")
+        return False
+    
+    if not re.search(r"[A-Z]", pass_to_check):
+        logging.error(f"Password '{pass_to_check}' does not contain an uppercase letter")
+        return False
+    
+    if not re.search(r"\d", pass_to_check):
+        logging.error(f"Password '{pass_to_check}' does not contain a numeric number")
+        return False
+    
+    if not re.search(r"[@#$%^&*]", pass_to_check):
+        logging.error(f"Password '{pass_to_check}' does not contain a special character")
+        return False
+
+    if re.match(pattern,pass_to_check):
+        logging.info(f"password {pass_to_check} is valid")
+        return True
+    else:
+        logging.warning(f"password {pass_to_check} id invalid")  
+        return False         
     
     
 
@@ -220,6 +251,15 @@ if check_pass(Password):
   print("Password is a Valid.")
 else:
   print("Password is Invalid.")  
+  
+  
+Password=input("Enter your password according to rule 4: ")
+if check_pass(Password):
+  print("Password is a Valid.")
+else:
+  print("Password is Invalid.")    
+  
+  
     
     
         
