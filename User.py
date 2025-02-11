@@ -92,6 +92,25 @@ def check_mobile_format(number):
     else:
         logging.warning(f"Mobile number {number} is invalid")
         return False 
+    
+    
+    
+def check_pass(pass_to_check):
+    
+    logging.debug(f"received password {pass_to_check} for checking")
+  
+    pattern=r"^.{8,}$"
+  
+    if not pass_to_check:
+        logging.critical("input password is empty")
+        return False
+
+    if re.match(pattern,pass_to_check):
+        logging.info(f"password {pass_to_check} is valid")
+        return True
+    else:
+        logging.warning(f"password {pass_to_check} id invalid")  
+        return False
  
     
     
@@ -129,6 +148,14 @@ if check_mobile_format(mobile_num):
     print(f"{mobile_num} is a valid mobile number.")
 else:
     print("Invalid mobile number.")
+    
+    
+
+Password=input("Enter your password: ")
+if check_pass(Password):
+  print("Password is a Valid.")
+else:
+  print("Password is Invalid.")      
     
     
         
