@@ -50,6 +50,27 @@ def validate_user_lastname(last_name):
     
     
 
+
+def check_mail(mail_to_check):
+    logging.debug(f"Received mail for validation: {mail_to_check}")
+    
+    pattern = r'^[a-zA-Z0-9.+_%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    
+    if not mail_to_check:
+        logging.critical(f"User input is empty")
+        return False
+        
+
+    if re.match(pattern, mail_to_check):
+        logging.info(f"Mail is valid: {mail_to_check}")
+        return True
+    else:
+        logging.warning(f"{mail_to_check} is an invalid mail")
+        return False  
+
+
+
+
  
     
     
@@ -66,11 +87,19 @@ if validate_user_name(initial_name):
 else:
     print("invalid user name")  
     
+    
 sur_name=input("Enter last name: ")
 if validate_user_lastname(sur_name):
     print(f"{sur_name} is valid user name")
 else:
     print("invalid user name")   
+    
+    
+email = input("Enter an email address: ")
+if check_mail(email):
+    print(f"{email} is a Valid Email Address.")
+else:
+    print(f"{email} is an Invalid Email Address.")
     
     
         
